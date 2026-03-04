@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import express from "express";
+import compression from "compression";
 import dotenv from "dotenv";
 import { pool, query, runMigrations } from "./db.js";
 
@@ -15,6 +16,7 @@ const CRM_HTML = path.join(ROOT_DIR, "pipeline (2).html");
 const UPLOADS_DIR = path.join(ROOT_DIR, "uploads");
 
 const app = express();
+app.use(compression());
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: false }));
 
